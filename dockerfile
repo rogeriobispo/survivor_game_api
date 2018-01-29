@@ -23,4 +23,4 @@ RUN  apt-get update && apt-get install -qq -y --no-install-recommends \
      COPY . .
         # . representa o diretório currente tanto para local quanto para o contanier
 #Roda o Servidor
-          CMD ["rails", "s", "-b", "0.0.0.0"]
+          CMD puma -C config/puma.rb
