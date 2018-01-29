@@ -1,6 +1,6 @@
 module Api
   module V1
-    class SurvivorController < Api::V1::ApiController
+    class SurvivorsController < Api::V1::ApiController
       def create
         @survivor = Survivor.new(survivor_params)
         if @survivor.save
