@@ -6,19 +6,17 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
-* System dependencies
+    2.4.1
 
 * Configuration
+  docker
+  Docker-compose
 
 * Database creation
+   rails db:create
 
 * Database initialization
 
 * How to run the test suite
+  rspec
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
