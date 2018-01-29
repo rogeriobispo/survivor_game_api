@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: 152030
+  host: db
+
+development:
+  <<: *default
+  database: levoo_test_development
+
+test:
+  <<: *default
+  database: levoo_test_test
+
+production:
+  <<: *default
+  database: levoo_test_production
+  username: levoo_test
+  password: <%= ENV['LEVOO_TEST_DATABASE_PASSWORD'] %>
