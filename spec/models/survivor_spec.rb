@@ -1,19 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Survivor, type: :model do
-  it 'should validate presence' do
-    survivor = Survivor.new
-    survivor.name = ''
-    survivor.gender = ''
-    survivor.valid?
-    survivor.errors[:name].should include("can't be blank")
-
-    survivor.name = 'Rogerio Bispo'
-    survivor.age = 34
-    survivor.gender = 'M'
-    survivor.last_longitude = '46'
-    survivor.last_latitude = '46'
-    survivor.valid?
-    survivor.errors[:name].should_not include("can't be blank")
+  it 'is not valid without fields' do
+    survivor = Survivor.new(name: '', age: 34, gender: '')
+    expect(survivor).to_not be_valid
+  end
+  it 'is  valid with all fields' do
+    survivor = Survivor.new(name: 'Rogerio Bispo',
+                            age: 34,
+                            gender: 'M',
+                            last_latitude: '46',
+                            last_longitude: '46'
+                           )
+    expect(survivor).to be_valid
   end
 end
