@@ -7,8 +7,32 @@ RSpec.describe Api::V1::SurvivorsController, type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'return http fail (missing params)' do
+    it 'return http fail (missing fields)' do
       post '/api/v1/survivors', params: { survivor: { name: 'empty' } }
+      expect(response).to have_http_status(422)
+    end
+  end
+
+  describe 'PATCH/PUT #survivor update location' do
+    it 'returns http sucess' do
+      survivor = FactoryBot.create(:survivor)
+      patch "/api/v1/survivors/#{survivor.id}",
+            params: { survivor: { last_longitude: 90,
+                                  last_latitude: 80 } }
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'return http fail (missing field)' do
+      survivor = FactoryBot.create(:survivor)
+      patch "/api/v1/survivors/#{survivor.id}",
+            params: { survivor: { last_longitude: nil } }
+      expect(response).to have_http_status(422)
+    end
+
+    it 'return http fail (not permited field)' do
+      survivor = FactoryBot.create(:survivor)
+      patch "/api/v1/survivors/#{survivor.id}",
+            params: { survivor: { name: 'Rogerio Bispo' } }
       expect(response).to have_http_status(422)
     end
   end

@@ -10,8 +10,7 @@ RSpec.describe Survivor, type: :model do
                             age: 34,
                             gender: 'M',
                             last_latitude: '46',
-                            last_longitude: '46'
-                           )
+                            last_longitude: '46')
     expect(survivor).to be_valid
   end
 end
