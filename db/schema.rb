@@ -10,16 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129211455) do
+ActiveRecord::Schema.define(version: 20180131130743) do
+
+  create_table "inventories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "survivors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",           null: false
-    t.integer  "age",            null: false
-    t.string   "gender",         null: false
-    t.string   "last_latitude",  null: false
-    t.string   "last_longitude", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "name",                           null: false
+    t.integer  "age",                            null: false
+    t.string   "gender",                         null: false
+    t.string   "last_latitude",                  null: false
+    t.string   "last_longitude",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "contaminated",   default: 0,     null: false
+    t.boolean  "zumbie",         default: false
   end
 
 end

@@ -1,7 +1,7 @@
 module Api
   module V1
     class SurvivorsController < Api::V1::ApiController
-      before_action :set_survivor, only: [:update]
+      before_action :set_survivor, only: [:update, :infected]
       def update
         if @survivor.update(survivor_update_params) && not_empty_param
           render json: @survivor
@@ -19,10 +19,17 @@ module Api
         end
       end
 
+      def infected
+        @survivor.add_contaminated_point
+        render json: @survivor if @survivor.save
+      end
+
       private
 
       def set_survivor
         @survivor = Survivor.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { not_found: 'Survivor not found' }, status: :unprocessable_entity
       end
 
       def survivor_params
