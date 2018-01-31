@@ -18,7 +18,7 @@ RSpec.describe Survivor, type: :model do
 
     it 'survivor must have a inventory' do
       survivor = FactoryBot.create(:survivor)
-      expect(survivor.inventory).to exist
+      expect(survivor.inventory.present?).to be_truthy
     end
   end
 

@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180131130743) do
+ActiveRecord::Schema.define(version: 20180131164048) do
 
   create_table "inventories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "survivor_id"
+    t.index ["survivor_id"], name: "index_inventories_on_survivor_id", using: :btree
   end
 
   create_table "survivors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -27,6 +29,10 @@ ActiveRecord::Schema.define(version: 20180131130743) do
     t.datetime "updated_at",                     null: false
     t.integer  "contaminated",   default: 0,     null: false
     t.boolean  "zumbie",         default: false
+    t.integer  "inventory_id"
+    t.index ["inventory_id"], name: "index_survivors_on_inventory_id", using: :btree
   end
 
+  add_foreign_key "inventories", "survivors"
+  add_foreign_key "survivors", "inventories"
 end
