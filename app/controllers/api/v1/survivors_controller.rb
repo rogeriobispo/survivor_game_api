@@ -2,6 +2,7 @@ module Api
   module V1
     class SurvivorsController < Api::V1::ApiController
       before_action :set_survivor, only: [:update, :infected]
+      # /api/v1/survivors/1
       def update
         if @survivor.update(survivor_update_params) && not_empty_param
           render json: @survivor
@@ -10,6 +11,7 @@ module Api
         end
       end
 
+      # /api/v1/survivors
       def create
         @survivor = Survivor.new(survivor_params)
         if @survivor.save
@@ -19,6 +21,7 @@ module Api
         end
       end
 
+      # /api/v1/survivors/1/infected
       def infected
         @survivor.add_contaminated_point
         render json: @survivor if @survivor.save
